@@ -36,7 +36,6 @@ public class Server {
             }
 
             System.out.println("Closing the connection and the sockets");
-
             // close
             ps.close();
             br.close();

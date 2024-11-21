@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         try {
-            JFrame frame = new JFrame("My First GUI");
+            JFrame frame = new JFrame("Client");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(300,300);
 
