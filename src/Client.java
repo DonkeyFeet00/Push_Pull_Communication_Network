@@ -10,7 +10,7 @@ public class Client {
         try {
             JFrame frame = new JFrame("Client");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(300,300);
+            frame.setSize(800,500);
 
 
             JButton button1 = new JButton("Button 1");

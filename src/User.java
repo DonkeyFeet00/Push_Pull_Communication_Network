@@ -4,7 +4,7 @@ public class User {
     private String userName;
     private ArrayList<String> messages = new ArrayList<>();
 
-    public void user(String userName) {
+    public User(String userName) {
         this.userName = userName;
     }
 
@@ -18,6 +18,10 @@ public class User {
 
     public ArrayList getMessages() {
         return messages;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
 }
