@@ -91,9 +91,12 @@ public class Server {
         for (int i = 0; i < userArrayList.size(); i++) {
             if (userArrayList.get(i).getUserName() == userName) {
                 ArrayList messages = userArrayList.get(i).getMessages();
-//                CREATE FOR LOOP TO PRINT EACH MESSAGE ON ITS OWN LINE
+                for (int j = 0; i < messages.size(); i++) {
+                    System.out.println(messages.get(j));
+                }
             }
         }
+        return "";
     }
 
     /*TODO*/
