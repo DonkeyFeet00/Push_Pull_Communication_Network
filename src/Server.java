@@ -51,13 +51,14 @@ public class Server {
                     ps.println(pull(incomingCommand.substring(5)));
                 }
                 else if (incomingCommand.matches("DeleteMessages")) {
-
+                    ps.println(deleteMessages(incomingCommand.substring(15)));
                 }
                 else if (incomingCommand.matches("KnowOthers")) {
-
+                    ps.println(knowOthers());
                 }
-
-
+                else {
+                    ps.println("Command not recognized");
+                }
             }
 
             //if the code gets to this point it means the user typed exit
@@ -109,4 +110,15 @@ public class Server {
     public static String push(String command) {
         return "";
     }
+
+    //TODO
+    public static String deleteMessages(String command) {
+        return "";
+    }
+
+//    TODO
+    public static String knowOthers() {
+        return "";
+    }
+
 }
