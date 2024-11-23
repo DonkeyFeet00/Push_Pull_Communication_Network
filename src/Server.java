@@ -95,11 +95,14 @@ public class Server {
                 ArrayList messages = userArrayList.get(i).getMessages();
                 String returnVal = "";
                 for (int j = 0; i < messages.size(); i++) {
-                     messages.get(j));
+                     returnVal += messages.get(j).toString();
                 }
+                return returnVal;
             }
         }
-        return "";
+
+        //if the code makes it to here, then no username existed that matches
+        return "This username does not exist";
     }
 
     /*TODO*/
