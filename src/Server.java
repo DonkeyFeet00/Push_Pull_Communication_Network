@@ -76,6 +76,9 @@ public class Server {
 
 
     public static String newClient(String userName) {
+        if (userName.equals("ALL"))
+            return "This username is invalid";
+
         //check if a user already exists with this name
         for (int i = 0; i < userArrayList.size(); i++) {
             if (userArrayList.get(i).getUserName() == userName) {
@@ -108,6 +111,11 @@ public class Server {
 
     /*TODO*/
     public static String push(String command) {
+        //split the command into usable segments
+        String sender = command.substring(0, command.indexOf(" "));
+        String receivers = command.substring(command.indexOf("{") + 1, command.indexOf("}"));
+        String message = command.substring(command.indexOf("}") + 1);
+        if (receivers.equals("ALL"))
         return "";
     }
 
