@@ -12,8 +12,6 @@ public class Server {
 
     public static void main(String[] args) {
 
-
-
         try {
 
             // Create server Socket that listens/bonds to port/endpoint address 6666 (any port id of your choice, should be >=1024, as other port addresses are reserved for system use)
@@ -82,7 +80,7 @@ public class Server {
         //check if a user already exists with this name
         for (int i = 0; i < userArrayList.size(); i++) {
             if (userArrayList.get(i).getUserName() == userName) {
-                return "“This username already existed";
+                return "“This username already exists";
             }
         }
         //if no user exists, create one
@@ -98,9 +96,11 @@ public class Server {
                 //put all their messages into a String
                 ArrayList messages = userArrayList.get(i).getMessages();
                 String returnVal = "";
-                for (int j = 0; i < messages.size(); i++) {
-                     returnVal += messages.get(j).toString();
+                for (int j = 0; j < messages.size(); j++) {
+                     returnVal += messages.get(j).toString() + "\n";
                 }
+                if (returnVal.equals(""))
+                    return "No Messages for this username.";
                 return returnVal;
             }
         }
@@ -113,14 +113,14 @@ public class Server {
         String returnVal = "";
 
         //split the command into usable segments
-        String sender = command.substring(0, command.indexOf(" "));
-        String message = command.substring(command.indexOf("}") + 1);
+        String sender = command.substring(0, command.indexOf(","));
+        String message = command.substring(command.indexOf("}") + 3);
         //make substring of receivers and split it into a string array to make it easier to work with
         String tempReceivers = command.substring(command.indexOf("{") + 1, command.indexOf("}"));
         String[] receivers = tempReceivers.split(", ");
 
         // check if the message is intended for all users, if so, send to all
-        if (receivers[0] == "ALL"){
+        if (receivers[0].equals("ALL")){
             userArrayList.forEach(user -> user.addMessage(message));
             return "the message was successfully forwarded to all receivers";
         }
@@ -129,7 +129,7 @@ public class Server {
 
         //search for each receiver in userarray. if found, add message and return success
         for (int i = 0; i < receivers.length; i++) {
-            for (int j = 0; i < userArrayList.size(); i++) {
+            for (int j = 0; j < userArrayList.size(); j++) {
                 if (userArrayList.get(j).getUserName().equals(receivers[i])){
                     userArrayList.get(j).addMessage(message);
                     returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName() + "\n";
@@ -160,13 +160,13 @@ public class Server {
 
 
     public static String knowOthers() {
-        String returnVal = "";
+        String returnVal = "Registered users:\n";
         for (int i = 0; i < userArrayList.size(); i++) {
             returnVal += userArrayList.get(i).getUserName() + "\n";
         }
 
 
-        if (returnVal == "") {
+        if (returnVal.equals("Registered users:\n")) {
             return "No current users exist";
         }
         else {
