@@ -115,7 +115,10 @@ public class Server {
         String sender = command.substring(0, command.indexOf(" "));
         String receivers = command.substring(command.indexOf("{") + 1, command.indexOf("}"));
         String message = command.substring(command.indexOf("}") + 1);
-        if (receivers.equals("ALL"))
+        if (receivers.equals("ALL")) {
+
+        }
+
         return "";
     }
 
