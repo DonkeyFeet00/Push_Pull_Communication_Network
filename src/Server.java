@@ -111,14 +111,32 @@ public class Server {
         return "";
     }
 
-    //TODO
-    public static String deleteMessages(String command) {
-        return "";
+
+    public static String deleteMessages(String userName) {
+        //search for the user in userArrayList
+        for (int i = 0; i < userArrayList.size(); i++) {
+            if (userArrayList.get(i).getUserName() == userName) {
+                userArrayList.get(i).clearMessages();
+                return "Messages Deleted";
+            }
+        }
+        return "This username does not exist";
     }
 
-//    TODO
+
     public static String knowOthers() {
-        return "";
+        String returnVal = "";
+        for (int i = 0; i < userArrayList.size(); i++) {
+            returnVal += userArrayList.get(i).getUserName() + "\n";
+        }
+
+
+        if (returnVal == "") {
+            return "No current users exist";
+        }
+        else {
+            return returnVal;
+        }
     }
 
 }
