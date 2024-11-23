@@ -109,17 +109,41 @@ public class Server {
         return "This username does not exist";
     }
 
-    /*TODO*/
     public static String push(String command) {
+        String returnVal = "";
+
         //split the command into usable segments
         String sender = command.substring(0, command.indexOf(" "));
-        String receivers = command.substring(command.indexOf("{") + 1, command.indexOf("}"));
         String message = command.substring(command.indexOf("}") + 1);
-        if (receivers.equals("ALL")) {
+        //make substring of receivers and split it into a string array to make it easier to work with
+        String tempReceivers = command.substring(command.indexOf("{") + 1, command.indexOf("}"));
+        String[] receivers = tempReceivers.split(", ");
 
+        // check if the message is intended for all users, if so, send to all
+        if (receivers[0] == "ALL"){
+            userArrayList.forEach(user -> user.addMessage(message));
+            return "the message was successfully forwarded to all receivers";
+        }
+        //flag so that we can return an error if user not found
+        boolean foundUser = false;
+
+        //search for each receiver in userarray. if found, add message and return success
+        for (int i = 0; i < receivers.length; i++) {
+            for (int j = 0; i < userArrayList.size(); i++) {
+                if (userArrayList.get(j).getUserName().equals(receivers[i])){
+                    userArrayList.get(j).addMessage(message);
+                    returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName() + "\n";
+                    foundUser = true;
+                }
+
+            }
+            //not found
+            if (foundUser == false) {
+                returnVal += "failed to forward to " + receivers[i] + ". This receiver does not exist.\n";
+            }
         }
 
-        return "";
+        return returnVal;
     }
 
 
