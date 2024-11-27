@@ -1,7 +1,12 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -14,104 +19,69 @@ import java.util.Scanner;
 public class Client extends Application {
     public static void main(String[] args) {
         launch(args);
-        try {
-
-//            JFrame frame = new JFrame("Client");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setSize(800,500);
-//
-//
-//            JButton button1 = new JButton("Button 1");
-//            JButton button2 = new JButton("Button 2");
-//            JTextField text1 = new JTextField(10);
-//
-//
-//            frame.getContentPane().add(button1);
-//            frame.getContentPane().add(button2);
-//            frame.getContentPane().add(text1);
-//            frame.setVisible(true);
-
-            // Create client socket to connect to certain server (Server IP, Port address)
-            // we use either "localhost" or "127.0.0.1" if the server runs on the same device as the client
-            Socket mySocket = new Socket("127.0.0.1", 6666);
-
-
-            // to interact (send data / read incoming data) with the server, we need to create the following:
-
-            //DataOutputStream object to send data through the socket
-            DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
-
-            // BufferReader object to read data coming from the server through the socket
-            BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
-
-
-            String statement = "";
-            Scanner in = new Scanner(System.in);
-
-            while(!statement.equals("exit")) {
-
-                statement = in.nextLine();  			// read user input from the terminal data to the server
-
-                outStream.writeBytes(statement+"\n");		// send such input data to the server
-
-
-                String str = inStream.readLine();     	// receive response from server
-
-                System.out.println(str);                // print this response
-
-            }
-
-            System.out.println("Closing the connection and the sockets");
-
-            // close connection.
-            outStream.close();
-            inStream.close();
-            mySocket.close();
-
-        } catch (Exception exc) {
-            System.out.println("Error is : " + exc.toString());
-
-        }
     }
+
 
     @Override
     public void start(Stage primaryStage) {
-        Button button = new Button("Click me!");
+        try {
+            //open a socket with the server
+            Socket mySocket = new Socket("127.0.0.1", 6666);
 
-        button.setOnAction((event) -> {
-            System.out.println("Button clicked!");
-        });
-
-        button.setCancelButton(false);
-        button.setDefaultButton(false);
-
-
-        Button buttonDefault = new Button("Default (OK)");
-
-        buttonDefault.setOnAction((event) -> {
-            System.out.println("Default Button clicked!");
-        });
-
-        buttonDefault.setCancelButton(false);
-        buttonDefault.setDefaultButton(true);
+            //create buffered reader and output stream
+            DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
+            BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 
 
-        Button buttonCancel = new Button("Cancel");
+            // Create a ComboBox (dropdown menu)
+            ComboBox<String> comboBox = new ComboBox<>();
+            comboBox.getItems().addAll("Add", "Remove", "Clear", "Get_Summation", "Get_Minimum", "Get_Maximum", "Display_Content", "Exit");
+            comboBox.getSelectionModel().selectFirst();
 
-        buttonCancel.setOnAction((event) -> {
-            System.out.println("Cancel Button clicked!");
-        });
+            // Create a TextField
+            TextField textField = new TextField();
+            textField.setPromptText("Enter number here");
 
-        buttonCancel.setCancelButton(true);
-        buttonCancel.setDefaultButton(false);
+            // Create a Button (submit button)
+            Button submitButton = new Button("Submit");
 
 
-        HBox vbox = new HBox(button, buttonDefault, buttonCancel);
-        Scene scene = new Scene(vbox);
-        primaryStage.setScene(scene);
-        primaryStage.setWidth(512);
-        primaryStage.setHeight(512);
-        primaryStage.show();
+            // Set an action for the button
+            submitButton.setOnAction(event -> {
+                String selectedCommand = comboBox.getValue();
+                String enteredText = textField.getText();
+                try {
+                    if (selectedCommand.equals("Add") || selectedCommand.equals("Remove")) {
+                        outStream.writeBytes("Sender: User_A; Receiver; Server_A; Payload: " + selectedCommand + " " + enteredText + "\n");
+                        System.out.println(inStream.readLine());
+                    } else if (selectedCommand.equals("Exit")) {
+                        // close connection.
+                        System.out.println("Closing the connection and the sockets");
+                        outStream.close();
+                        inStream.close();
+                        mySocket.close();
+                        primaryStage.close();
+                    } else {
+                        outStream.writeBytes("Sender: User_A; Receiver; Server_A; Payload: " + selectedCommand + "\n");
+                        System.out.println(inStream.readLine());
+                    }
+                } catch (Exception exc){
+                    System.out.println("Error is : " + exc.toString());
+                }
+            });
+
+            // Layout
+            VBox layout = new VBox(10, comboBox, textField, submitButton);
+            Scene scene = new Scene(layout, 500, 200);
+
+            // Set up the stage
+            primaryStage.setTitle("Client");
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        } catch (Exception exc) {
+            System.out.println("Error is : " + exc.toString());
+        }
     }
 
 }
