@@ -33,14 +33,13 @@ public class Client extends Application {
             BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 
 
-            // Create a ComboBox (dropdown menu)
-            ComboBox<String> comboBox = new ComboBox<>();
-            comboBox.getItems().addAll("Add", "Remove", "Clear", "Get_Summation", "Get_Minimum", "Get_Maximum", "Display_Content", "Exit");
-            comboBox.getSelectionModel().selectFirst();
+            TextArea textFromServer = new TextArea();
+            textFromServer.setEditable(false);
 
-            // Create a TextField
+
+            // Create a TextField for
             TextField textField = new TextField();
-            textField.setPromptText("Enter number here");
+            textField.setPromptText("Enter commands here");
 
             // Create a Button (submit button)
             Button submitButton = new Button("Submit");
@@ -48,13 +47,9 @@ public class Client extends Application {
 
             // Set an action for the button
             submitButton.setOnAction(event -> {
-                String selectedCommand = comboBox.getValue();
                 String enteredText = textField.getText();
                 try {
-                    if (selectedCommand.equals("Add") || selectedCommand.equals("Remove")) {
-                        outStream.writeBytes("Sender: User_A; Receiver; Server_A; Payload: " + selectedCommand + " " + enteredText + "\n");
-                        System.out.println(inStream.readLine());
-                    } else if (selectedCommand.equals("Exit")) {
+                    if (enteredText.equals("Exit")) {
                         // close connection.
                         System.out.println("Closing the connection and the sockets");
                         outStream.close();
@@ -62,7 +57,7 @@ public class Client extends Application {
                         mySocket.close();
                         primaryStage.close();
                     } else {
-                        outStream.writeBytes("Sender: User_A; Receiver; Server_A; Payload: " + selectedCommand + "\n");
+                        outStream.writeBytes(enteredText + "\n");
                         System.out.println(inStream.readLine());
                     }
                 } catch (Exception exc){
@@ -71,7 +66,7 @@ public class Client extends Application {
             });
 
             // Layout
-            VBox layout = new VBox(10, comboBox, textField, submitButton);
+            VBox layout = new VBox(10, textFromServer, textField, submitButton);
             Scene scene = new Scene(layout, 500, 200);
 
             // Set up the stage
