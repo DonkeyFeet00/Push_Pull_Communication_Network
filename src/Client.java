@@ -32,12 +32,12 @@ public class Client extends Application {
             DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
             BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 
-
+            //box for server responses TODO: connect this box to server responses
             TextArea textFromServer = new TextArea();
             textFromServer.setEditable(false);
 
 
-            // Create a TextField for
+            // Create a TextField for user to type commands in
             TextField textField = new TextField();
             textField.setPromptText("Enter commands here");
 
