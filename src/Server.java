@@ -34,7 +34,9 @@ public class Server {
 
             // Let's keep reading data from the client, as long as the client doesn't send "exit".
             String incomingCommand = "";
-            while (incomingCommand != "exit") {
+
+
+            while (!incomingCommand.equals("exit")) {
                 incomingCommand = br.readLine();
                 System.out.println("message received: " + incomingCommand);   //print the incoming data from the client
 
