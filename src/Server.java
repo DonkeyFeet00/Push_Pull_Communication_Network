@@ -141,7 +141,7 @@ public class Server {
 
             }
             //not found
-            if (foundUser == false) {
+            if (!foundUser) {
                 returnVal += "failed to forward to " + receivers[i] + ". This receiver does not exist.\n";
             }
         }
