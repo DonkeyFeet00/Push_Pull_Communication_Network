@@ -82,7 +82,7 @@ public class Server {
 
         //check if a user already exists with this name
         for (int i = 0; i < userArrayList.size(); i++) {
-            if (userArrayList.get(i).getUserName() == userName) {
+            if (Objects.equals(userArrayList.get(i).getUserName(), userName)) {
                 return "“This username already exists";
             }
         }
