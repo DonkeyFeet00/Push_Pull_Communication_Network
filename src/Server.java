@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Server {
 
@@ -152,7 +153,7 @@ public class Server {
     public static String deleteMessages(String userName) {
         //search for the user in userArrayList
         for (int i = 0; i < userArrayList.size(); i++) {
-            if (userArrayList.get(i).getUserName() == userName) {
+            if (Objects.equals(userArrayList.get(i).getUserName(), userName)) {
                 userArrayList.get(i).clearMessages();
                 return "Messages Deleted";
             }
