@@ -102,7 +102,7 @@ public class Server {
                 for (int j = 0; j < messages.size(); j++) {
                      returnVal += messages.get(j).toString() + "\n";
                 }
-                if (returnVal.equals(""))
+                if (returnVal.isEmpty())
                     return "No Messages for this username.";
                 return returnVal;
             }
