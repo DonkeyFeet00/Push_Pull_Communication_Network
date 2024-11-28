@@ -95,7 +95,7 @@ public class Server {
     public static String pull(String userName) {
         //search for the user in userArrayList
         for (int i = 0; i < userArrayList.size(); i++) {
-            if (userArrayList.get(i).getUserName() == userName) {
+            if (Objects.equals(userArrayList.get(i).getUserName(), userName)) {
                 //put all their messages into a String
                 ArrayList messages = userArrayList.get(i).getMessages();
                 String returnVal = "";
