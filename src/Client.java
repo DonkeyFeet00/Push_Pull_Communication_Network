@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -59,10 +58,7 @@ public class Client extends Application {
                         primaryStage.close();
                     } else {
                         outStream.writeBytes(enteredText + "\n");
-                        String response = "";
-                        while (!Objects.equals(response = inStream.readLine(), "")){
-                            System.out.println(response);
-                        }
+                        System.out.println(inStream.readLine());
                     }
                 } catch (Exception exc){
                     System.out.println("Error is : " + exc.toString());
