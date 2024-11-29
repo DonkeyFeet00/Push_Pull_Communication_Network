@@ -35,7 +35,7 @@ public class Client extends Application {
             //box for server responses TODO: connect this box to server responses
             TextArea textFromServer = new TextArea();
             textFromServer.setEditable(false);
-            textFromServer.appendText("Accepted Commands:\nNewClient username\nPush username, {receivers}, msg\nPull username\nDeleteMessages username\nKnowOthers\nExit\n");
+            textFromServer.appendText("Accepted Commands:\nNewClient (username)\nPush (username), {receivers}, msg\nPull (username)\nDeleteMessages (username)\nKnowOthers\nExit\n");
 
 
             // Create a TextField for user to type commands in
