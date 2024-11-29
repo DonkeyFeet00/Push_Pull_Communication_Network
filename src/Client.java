@@ -63,11 +63,11 @@ public class Client extends Application {
                         mySocket.close();
                         primaryStage.close();
                     } else {
-                        Integer data;
+                        int data;
                         outStream.writeBytes(enteredText + "\n");
 
                         while((data = inStream.read()) != -1){
-                            textFromServer.appendText(data.toString());
+                            System.out.print((char) data);
                         }
                         textField.setText("");
 
