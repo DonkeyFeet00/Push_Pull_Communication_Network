@@ -165,6 +165,7 @@ public class Server {
     }
 
 
+    //For each entry in the "userArrayList", print it out using a for loop
     public static String knowOthers() {
         String returnVal = "Registered users:\n";
         for (int i = 0; i < userArrayList.size(); i++) {

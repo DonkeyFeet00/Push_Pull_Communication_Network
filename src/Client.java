@@ -26,7 +26,7 @@ public class Client extends Application {
     public void start(Stage primaryStage) {
         try {
             //open a socket with the server
-            Socket mySocket = new Socket("127.0.0.1", 6666);
+            Socket mySocket = new Socket("25.52.242.65", 6666);
 
             //create buffered reader and output stream
             DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
@@ -59,6 +59,7 @@ public class Client extends Application {
                     } else {
                         outStream.writeBytes(enteredText + "\n");
                         System.out.println(inStream.readLine());
+
                     }
                 } catch (Exception exc){
                     System.out.println("Error is : " + exc.toString());
