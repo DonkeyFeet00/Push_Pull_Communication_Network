@@ -67,7 +67,7 @@ public class Client extends Application {
                         outStream.writeBytes(enteredText + "\n");
 
                         while(inStream.ready()){
-                            textFromServer.appendText(inStream.readLine());
+                            textFromServer.appendText(Integer.toString(inStream.read()));
                         }
                         textField.setText("");
 
