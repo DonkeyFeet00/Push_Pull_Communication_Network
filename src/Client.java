@@ -58,7 +58,10 @@ public class Client extends Application {
                         primaryStage.close();
                     } else {
                         outStream.writeBytes(enteredText + "\n");
-                        System.out.println(inStream.readLine());
+                        String response = "";
+                        while ((response = inStream.readLine()) != null){
+                            System.out.println(response);
+                        }
                     }
                 } catch (Exception exc){
                     System.out.println("Error is : " + exc.toString());
