@@ -8,6 +8,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.ScrollBar;
+import javafx.geometry.Orientation;
+
+
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -59,9 +63,14 @@ public class Client extends Application {
                         mySocket.close();
                         primaryStage.close();
                     } else {
+                        Integer data;
                         outStream.writeBytes(enteredText + "\n");
-                        textFromServer.appendText(inStream.readLine() + "\n");
+
+                        while((data = inStream.read()) != -1){
+                            textFromServer.appendText(data.toString());
+                        }
                         textField.setText("");
+
                     }
                 } catch (Exception exc){
                     System.out.println("Error is : " + exc.toString());

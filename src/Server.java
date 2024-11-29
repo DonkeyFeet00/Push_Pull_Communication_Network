@@ -100,7 +100,7 @@ public class Server {
                 ArrayList messages = userArrayList.get(i).getMessages();
                 String returnVal = "";
                 for (int j = 0; j < messages.size(); j++) {
-                     returnVal += messages.get(j).toString() + "\n";
+                     returnVal += messages.get(j).toString();
                 }
                 if (returnVal.isEmpty())
                     return "No Messages for this username.";
