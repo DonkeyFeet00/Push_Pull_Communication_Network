@@ -169,7 +169,7 @@ public class Server {
     public static String knowOthers() {
         String returnVal = "Registered users: ";
         for (int i = 0; i < userArrayList.size(); i++) {
-            returnVal += userArrayList.get(i).getUserName()+" ";
+            returnVal += userArrayList.get(i).getUserName()+", ";
         }
 
 
