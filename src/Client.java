@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -59,7 +60,7 @@ public class Client extends Application {
                     } else {
                         outStream.writeBytes(enteredText + "\n");
                         String response = "";
-                        while ((response = inStream.readLine()) != null){
+                        while (!Objects.equals(response = inStream.readLine(), "")){
                             System.out.println(response);
                         }
                     }
