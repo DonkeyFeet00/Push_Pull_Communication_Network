@@ -60,6 +60,7 @@ public class Client extends Application {
                     } else {
                         outStream.writeBytes(enteredText + "\n");
                         System.out.println(inStream.readLine());
+                        textField.setText("");
                     }
                 } catch (Exception exc){
                     System.out.println("Error is : " + exc.toString());
