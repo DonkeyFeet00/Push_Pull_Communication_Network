@@ -42,7 +42,7 @@ public class Server {
                 System.out.println("message received: " + incomingCommand);   //print the incoming data from the client
 
                 //figure out what command the message uses and call that method
-                if (incomingCommand.matches("NewUser.+")) {
+                if (incomingCommand.matches("NewClient.+")) {
                     ps.println(newClient(incomingCommand.substring(8)));
                 }
                 else if (incomingCommand.matches("Push.+")) {
