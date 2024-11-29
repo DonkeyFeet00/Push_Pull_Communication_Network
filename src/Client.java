@@ -44,6 +44,7 @@ public class Client extends Application {
 
             // Create a Button (submit button)
             Button submitButton = new Button("Submit");
+            submitButton.setDefaultButton(true);
 
 
             // Set an action for the button
