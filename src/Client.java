@@ -60,7 +60,7 @@ public class Client extends Application {
                         primaryStage.close();
                     } else {
                         outStream.writeBytes(enteredText + "\n");
-                        textFromServer.appendText(inStream.readLine());
+                        textFromServer.appendText(inStream.readLine() + "\n");
                         textField.setText("");
                     }
                 } catch (Exception exc){
