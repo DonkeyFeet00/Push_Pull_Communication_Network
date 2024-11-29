@@ -167,13 +167,13 @@ public class Server {
 
     //For each entry in the "userArrayList", print it out using a for loop
     public static String knowOthers() {
-        String returnVal = "Registered users:\n";
+        String returnVal = "Registered users: ";
         for (int i = 0; i < userArrayList.size(); i++) {
-            returnVal += userArrayList.get(i).getUserName() + "\n";
+            returnVal += userArrayList.get(i).getUserName()+" ";
         }
 
 
-        if (returnVal.equals("Registered users:\n")) {
+        if (returnVal.equals("Registered users: ")) {
             return "No current users exist";
         }
         else {
