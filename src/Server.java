@@ -43,7 +43,7 @@ public class Server {
 
                 //figure out what command the message uses and call that method
                 if (incomingCommand.matches("NewClient.+")) {
-                    ps.println(newClient(incomingCommand.substring(8)));
+                    ps.println(newClient(incomingCommand.substring(10)));
                 }
                 else if (incomingCommand.matches("Push.+")) {
                     ps.println(push(incomingCommand.substring(5)));
