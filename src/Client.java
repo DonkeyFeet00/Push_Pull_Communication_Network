@@ -24,12 +24,7 @@ public class Client extends Application {
         try {
             Font font = new Font(14);
 
-            //open a socket with the server
-            Socket mySocket = new Socket("25.52.242.65", 6666);
 
-            //create buffered reader and output stream
-            DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
-            BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 
             //box for server responses TODO: connect this box to server responses
             TextArea textFromServer = new TextArea();
@@ -50,25 +45,31 @@ public class Client extends Application {
 
             // Set an action for the button
             submitButton.setOnAction(event -> {
-                String enteredText = textField.getText();
                 try {
-                    if (enteredText.equals("Exit")) {
-                        // close connection.
-                        System.out.println("Closing the connection and the sockets");
-                        outStream.close();
-                        inStream.close();
-                        mySocket.close();
-                        primaryStage.close();
-                    } else {
+                    //open a socket with the server
+                    Socket mySocket = new Socket("25.52.242.65", 6666);
+
+                    //create buffered reader and output stream
+                    DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
+                    BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
+
+                    String enteredText = textField.getText();
+
+                    if (!enteredText.equals("Exit")) {
                         outStream.writeBytes(enteredText + "\n");
                         textField.setText("");
                         textFromServer.appendText(inStream.readLine() + "\n");
-
-
-
                     }
-                } catch (Exception exc){
-                    System.out.println("Error is : " + exc.toString());
+
+                    // close connection.
+                    System.out.println("Closing the connection and the sockets");
+                    outStream.close();
+                    inStream.close();
+                    mySocket.close();
+
+
+                } catch(Exception e) {
+                    textFromServer.appendText("Error: " + e + "\n");
                 }
             });
 
