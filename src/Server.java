@@ -135,14 +135,14 @@ public class Server {
                 for (int j = 0; j < userArrayList.size(); j++) {
                     if (userArrayList.get(j).getUserName().equals(receivers[i])) {
                         userArrayList.get(j).addMessage(message);
-                        returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName() + "\n";
+                        returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName();
                         foundUser = true;
                     }
 
                 }
                 //not found
                 if (!foundUser) {
-                    returnVal += "failed to forward to " + receivers[i] + ". This receiver does not exist.\n";
+                    returnVal += "failed to forward to " + receivers[i] + ". This receiver does not exist.";
                 }
             }
 
