@@ -7,18 +7,17 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Server {
+    //port to run the server on
+    static final int SERVER_PORT = 6666;
 
     static ArrayList<User> userArrayList = new ArrayList<User>();
 
-
     public static void main(String[] args) {
-
-
         // Create server Socket that listens/bonds to port/endpoint address 6666 (any port id of your choice, should be >=1024, as other port addresses are reserved for system use)
         while (true){
             try {
-                ServerSocket mySocket = new ServerSocket(6666);
-                System.out.println("Startup the server side over port 6666 ....");
+                ServerSocket mySocket = new ServerSocket(SERVER_PORT);
+                System.out.println("Startup the server side over port " + SERVER_PORT + " ....");
 
                 // use the created ServerSocket and accept() to start listening for incoming client requests targeting this server and this port
                 Socket connectedClient = mySocket.accept();
