@@ -49,7 +49,6 @@ public class Client extends Application {
                     BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 
                     String enteredText = textField.getText();
-
                     if (!enteredText.equals("Exit")) {
                         outStream.writeBytes(enteredText + "\n");
                         textField.setText("");
@@ -61,6 +60,9 @@ public class Client extends Application {
                     outStream.close();
                     inStream.close();
                     mySocket.close();
+
+                    if (enteredText.equals("Exit"))
+                        primaryStage.close();
 
 
                 } catch(Exception e) {
