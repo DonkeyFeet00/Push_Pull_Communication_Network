@@ -1,37 +1,32 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.Font;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
-
-
 public class Client extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-
     @Override
     public void start(Stage primaryStage) {
         try {
-            Font font = new Font(14);
+            Font font = new Font(18);
 
-
-
-            //box for server responses TODO: connect this box to server responses
+            //box for server responses and error output
             TextArea textFromServer = new TextArea();
             textFromServer.setFont(font);
             textFromServer.setEditable(false);
-            textFromServer.appendText("Accepted Commands:\nNewClient (username)\nPush (username), {receivers}, msg\nPull (username)\nDeleteMessages (username)\nKnowOthers\nExit\n");
-
+            textFromServer.appendText(
+                    "Accepted Commands:" +
+                    "\nNewClient (username)" +
+                    "\nPush (username), {receivers}, msg" +
+                    "\nPull (username)" +
+                    "\nDeleteMessages (username)" +
+                    "\nKnowOthers" +
+                    "\nExit\n");
 
             // Create a TextField for user to type commands in
             TextField textField = new TextField();
@@ -86,5 +81,4 @@ public class Client extends Application {
             System.out.println("Error is : " + exc.toString());
         }
     }
-
 }

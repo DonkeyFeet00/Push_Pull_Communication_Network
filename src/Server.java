@@ -15,12 +15,10 @@ public class Server {
 
 
         // Create server Socket that listens/bonds to port/endpoint address 6666 (any port id of your choice, should be >=1024, as other port addresses are reserved for system use)
-        try {
-            ServerSocket mySocket = new ServerSocket(6666);
-            System.out.println("Startup the server side over port 6666 ....");
-
             while (true){
                 try {
+                    ServerSocket mySocket = new ServerSocket(6666);
+                    System.out.println("Startup the server side over port 6666 ....");
 
                     // use the created ServerSocket and accept() to start listening for incoming client requests targeting this server and this port
                     Socket connectedClient = mySocket.accept();
@@ -72,9 +70,6 @@ public class Server {
                     System.out.println("Error :" + exc.toString());
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
 
 
     }
