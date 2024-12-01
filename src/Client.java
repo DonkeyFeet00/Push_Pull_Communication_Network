@@ -7,6 +7,12 @@ import javafx.scene.text.Font;
 import java.io.*;
 import java.net.Socket;
 public class Client extends Application {
+
+//____________Server address and port__________________
+    final String SERVER_ADDRESS = "25.52.242.65";
+    final int SERVER_PORT = 6666;
+
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -42,12 +48,13 @@ public class Client extends Application {
             submitButton.setOnAction(event -> {
                 try {
                     //open a socket with the server
-                    Socket mySocket = new Socket("25.52.242.65", 6666);
+                    Socket mySocket = new Socket(SERVER_ADDRESS, SERVER_PORT);
 
                     //create buffered reader and output stream
                     DataOutputStream outStream = new DataOutputStream(mySocket.getOutputStream());
                     BufferedReader inStream = new BufferedReader(new InputStreamReader(mySocket.getInputStream()));
 
+                    //this block sends the text to the server and the server decides whether the command is valid
                     String enteredText = textField.getText();
                     if (!enteredText.equals("Exit")) {
                         outStream.writeBytes(enteredText + "\n");
@@ -61,9 +68,9 @@ public class Client extends Application {
                     inStream.close();
                     mySocket.close();
 
+                    //also close the window if the user typed exit
                     if (enteredText.equals("Exit"))
                         primaryStage.close();
-
 
                 } catch(Exception e) {
                     textFromServer.appendText("Error: " + e + "\n");
