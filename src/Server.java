@@ -1,5 +1,3 @@
-//Patrick Olszewski and Jenny McDonnell
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -90,7 +88,6 @@ public class Server {
                 //append all messages into a string to be returned
                 String returnVal = "";
                 for (int j = 0; j < messages.size(); j++) {
-                    returnVal="Messages for "+ userName +":";
                      returnVal += messages.get(j).toString();
                 }
 
@@ -119,7 +116,7 @@ public class Server {
             // check if the message is intended for all users, if so, send to all
             if (receivers[0].equals("ALL")) {
                 userArrayList.forEach(user -> user.addMessage(message));
-                return "The message was successfully forwarded to all receivers";
+                return "the message was successfully forwarded to all receivers";
             }
 
             //flag so that we can return an error if user not found
@@ -130,7 +127,7 @@ public class Server {
                 for (int j = 0; j < userArrayList.size(); j++) {
                     if (userArrayList.get(j).getUserName().equals(receivers[i])) {
                         userArrayList.get(j).addMessage(message);
-                        returnVal += "Successfully forwarded to: " + userArrayList.get(j).getUserName() +" ";
+                        returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName();
                         foundUser = true;
                     }
                 }
@@ -158,12 +155,12 @@ public class Server {
 
     //For each entry in the "userArrayList", print it out using a for loop
     public static String knowOthers() {
-        String returnVal = "Registered users are: ";
+        String returnVal = "Registered users: ";
         for (int i = 0; i < userArrayList.size(); i++) {
             returnVal += userArrayList.get(i).getUserName()+", ";
         }
 
-        if (returnVal.equals("Registered users are: "))
+        if (returnVal.equals("Registered users: "))
             return "No current users exist";
         else
             return returnVal;
