@@ -1,3 +1,5 @@
+//Patrick Olszewski and Jenny McDonnell
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,7 +11,7 @@ import java.net.Socket;
 public class Client extends Application {
 
 //____________Server address and port__________________
-    final String SERVER_ADDRESS = "25.52.242.65";
+    final String SERVER_ADDRESS = "127.0.0.1";
     final int SERVER_PORT = 6666;
 
 
