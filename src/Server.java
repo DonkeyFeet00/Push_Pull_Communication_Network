@@ -127,7 +127,7 @@ public class Server {
                 for (int j = 0; j < userArrayList.size(); j++) {
                     if (userArrayList.get(j).getUserName().equals(receivers[i])) {
                         userArrayList.get(j).addMessage(message);
-                        returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName();
+                        returnVal += "Successfully forwarded to " + userArrayList.get(j).getUserName()+" ";
                         foundUser = true;
                     }
                 }
