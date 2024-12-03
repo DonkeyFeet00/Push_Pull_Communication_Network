@@ -103,7 +103,7 @@ public class Server {
     public static String push(String command) {
         String returnVal = "";
         //ensure command matches the format we need
-        if (command.matches("[a-zA-z0-9]+, \\{[a-zA-z0-9]+}, .+")){
+        if (command.matches("[a-zA-z0-9]+, \\{[a-zA-z0-9, ]+}, .+")){
 
             //split the command into usable segments
             String sender = command.substring(0, command.indexOf(","));
