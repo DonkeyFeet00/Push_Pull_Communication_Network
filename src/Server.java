@@ -86,9 +86,9 @@ public class Server {
                 ArrayList messages = userArrayList.get(i).getMessages();
 
                 //append all messages into a string to be returned
-                String returnVal = "";
+                String returnVal = "Messages for "+ userName + ": ";
                 for (int j = 0; j < messages.size(); j++) {
-                     returnVal += messages.get(j).toString();
+                     returnVal += messages.get(j).toString()+", ";
                 }
 
                 if (returnVal.isEmpty())
