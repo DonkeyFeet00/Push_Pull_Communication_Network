@@ -58,6 +58,7 @@ public class Client extends Application {
 
                     //this block sends the text to the server and the server decides whether the command is valid
                     String enteredText = textField.getText();
+                    textFromServer.appendText(enteredText + "\n"); //add the command to the top box for readability
                     if (!enteredText.equals("Exit")) {
                         outStream.writeBytes(enteredText + "\n");
                         textField.setText("");
